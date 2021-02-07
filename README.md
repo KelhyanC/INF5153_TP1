@@ -1,6 +1,6 @@
 # TP 1 - Jeu de Poker (Fiche de réponses)
 
-  - Auteur : Prénom, Nom (`Code permanent`)
+  - Auteur : Kelhyan, Carmont (`CARK68120101`)
   - Date de remise : JJ/MM/AAAA
   - Estimation du temps de travail passé sur le projet : _xx_ heures.
 
