@@ -1,0 +1,11 @@
+@startuml
+!include _common.style
+
+title Poker Game (Object)
+center footer project #1 - object diagram
+
+object "m: Main" as M {
+  result = null
+}
+
+@enduml

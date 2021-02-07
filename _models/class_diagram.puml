@@ -1,0 +1,25 @@
+@startuml
+!include _common.style
+
+title Poker Game (Structure)
+center footer project #1 - class diagram
+
+
+package uqam.inf5153.poker {
+
+  class Main {
+    String result
+    --
+    + {static} main(args: String[])
+    --
+    - str2Array(s: String): String[]
+    - findComb(cs: String[]): String
+    - comp(p1: String, p2: String): String
+    - maxVal(cs: String[]): Char
+    - tie(p1: String, p2: String): String
+    - getTable(): Map<Char, Int>
+  }
+
+}
+
+@enduml

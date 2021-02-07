@@ -1,0 +1,36 @@
+@startuml
+!include _common.style
+
+title Poker Game (Behavior)
+center footer project #1 - sequence diagram
+
+actor "User" as U
+participant "_: Main" as M
+
+U -> M: main(args: String[])
+activate M
+    alt |args| = 2
+        M -> M: p1 = str2Array(args[0])
+        M -> M: p2 = str2Array(args[1])
+    else
+        create "s: Scanner" as S
+        M -> S: new(stdin)
+        M -> S: readLine()
+        S --> M: line
+        M -> M: p1 = str2Array(line)
+        M -> S: readLine()
+        S --> M: line
+        M -> M: p2 = str2Array(line)
+        M -> S: close()
+        destroy S
+    end
+    opt error
+        M --> U: "ERROR"
+    end
+    M -> M: c1 = findComb(p1)
+    M -> M: c2 = findComb(p2)
+    M -> M: result = comp(c1, c2)
+    M --> U: result
+deactivate M
+
+@enduml
