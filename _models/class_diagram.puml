@@ -20,6 +20,58 @@ package uqam.inf5153.poker {
     - getTable(): Map<Char, Int>
   }
 
+  Class Carte{
+    - valeur : Valeur
+    - couleur : Couleur
+  }
+
+  Enum Valeur{
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+    T
+    J
+    Q
+    K
+  }
+
+  Enum Couleur{
+    C
+    H
+    D
+    S
+  }
+
+  class Mains{
+    - cartes: ArrayList<Carte>
+    - cartePlusForte() : Carte 
+  }
+
+  class Joueur{
+    - id : String
+    - main : Mains
+    - victoires : int
+  }
+
+  class Partie{
+    + resultat : String  //obtenir main gagnante du joueur
+    - joueurs : ArrayList
+
+  }
+
+  Carte *-- "1" Valeur
+  Carte *-- "1" Couleur
+  Mains *-- Carte
+  Joueur --> Mains
+  Partie --> Joueur
+  Main --> Partie
+
 }
 
 @enduml
