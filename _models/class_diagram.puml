@@ -21,8 +21,6 @@ package uqam.inf5153.poker {
   }
 
   Class Carte{
-    - valeur : Valeur
-    - couleur : Couleur
   }
 
   Enum Valeur{
@@ -69,7 +67,7 @@ package uqam.inf5153.poker {
   Carte *-- "1" Couleur
   Mains *-- Carte
   Joueur --> Mains
-  Partie --> Joueur
+  Partie --> "2..*" Joueur
   Main --> Partie
 
 }
