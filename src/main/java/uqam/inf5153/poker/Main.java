@@ -29,11 +29,7 @@ public class Main {
          * store the result result = comp(findComb(p1), findComb(p2)); //Display the
          * winner. System.out.println("Result: " + result);
          */
-        Mains test = new Mains("2C 2D 5H TS KS");
-        Carte test2 = new Carte("1", "h");
-        test2.couleur = Couleur.D;
-        test2.valeur = Valeur.TROIS;
-        test2.print();
+        Mains test = new Mains("1C 4H QD 9D 3S");
     }
 
     /**

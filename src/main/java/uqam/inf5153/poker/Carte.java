@@ -2,8 +2,8 @@ package uqam.inf5153.poker;
 
 public class Carte {
 
-    /* private */ Valeur valeur;
-    /* private */ Couleur couleur;
+    private Valeur valeur;
+    private Couleur couleur;
 
     public Carte(String val, String clr) {
 
@@ -29,5 +29,9 @@ public class Carte {
 
     public boolean valeurEgale(Carte autre) {
         return this.valeur.equals(autre.valeur);
+    }
+
+    public boolean valeurSuperieure(Carte autre) {
+        return this.valeur.ordinal() > autre.valeur.ordinal();
     }
 }
