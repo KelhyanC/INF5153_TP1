@@ -23,6 +23,14 @@ public class Carte {
         System.out.println("valeur : " + this.valeur + " Couleur : " + this.couleur);
     }
 
+    public String afficherValeur() {
+        return String.valueOf(this.valeur);
+    }
+
+    public String afficherCouleur() {
+        return String.valueOf(this.couleur);
+    }
+
     public boolean couleurEgale(Carte autre) {
         return this.couleur.equals(autre.couleur);
     }

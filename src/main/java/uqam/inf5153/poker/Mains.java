@@ -6,8 +6,9 @@ import java.util.List;
 public class Mains implements Combinaison {
 
     private List<Carte> cartes;
-    private Combo plusForteCombi;
-    private List<Carte> mainForte;
+
+    Combo plusForteCombi;
+    List<Carte> mainForte;
 
     public Mains(String saisie) {
 
@@ -29,26 +30,6 @@ public class Mains implements Combinaison {
 
         this.plusForteCombi = trouverCombo();
 
-    }
-
-    @Override
-    public Combo trouverCombo() {
-        if (this.flush()) {
-            return Combo.COULEUR;
-        }
-        if (this.paire()) {
-            return Combo.PAIRE;
-        }
-        Carte max = this.cartes.get(0);
-        for (int i = 1; i < this.cartes.size(); i++) {
-            if (this.cartes.get(i).valeurSuperieure(max)) {
-                max = this.cartes.get(i);
-            }
-        }
-        List<Carte> solo = new ArrayList<>();
-        solo.add(max);
-        this.mainForte = solo;
-        return Combo.HAUTE_CARTE;
     }
 
     private boolean flush() {
@@ -86,6 +67,37 @@ public class Mains implements Combinaison {
             this.mainForte = duo;
         }
         return estPaire;
+    }
+
+    @Override
+    public Combo trouverCombo() {
+        if (this.flush()) {
+            return Combo.COULEUR;
+        }
+        if (this.paire()) {
+            return Combo.PAIRE;
+        }
+        Carte max = this.cartes.get(0);
+        for (int i = 1; i < this.cartes.size(); i++) {
+            if (this.cartes.get(i).valeurSuperieure(max)) {
+                max = this.cartes.get(i);
+            }
+        }
+        List<Carte> solo = new ArrayList<>();
+        solo.add(max);
+        this.mainForte = solo;
+        return Combo.HAUTE_CARTE;
+    }
+
+    public String afficherMainForte() {
+        switch (this.plusForteCombi) {
+            case COULEUR:
+                return Combinaison.Combo.COULEUR + " à " + this.mainForte.get(0).afficherCouleur();
+            case PAIRE:
+                return Combinaison.Combo.PAIRE + " de " + this.mainForte.get(0).afficherValeur();
+            default:
+                return this.mainForte.get(0).afficherValeur() + " de " + this.mainForte.get(0).afficherCouleur();
+        }
     }
 
 }
