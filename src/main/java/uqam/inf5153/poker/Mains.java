@@ -92,9 +92,11 @@ public class Mains implements Combinaison {
     public String afficherMainForte() {
         switch (this.plusForteCombi) {
             case COULEUR:
-                return Combinaison.Combo.COULEUR + " à " + this.mainForte.get(0).afficherCouleur();
+                return Combinaison.Combo.COULEUR.toString().toLowerCase() + " a "
+                        + this.mainForte.get(0).afficherCouleur();
             case PAIRE:
-                return Combinaison.Combo.PAIRE + " de " + this.mainForte.get(0).afficherValeur();
+                return Combinaison.Combo.PAIRE.toString().toLowerCase() + " de "
+                        + this.mainForte.get(0).afficherValeur();
             default:
                 return this.mainForte.get(0).afficherValeur() + " de " + this.mainForte.get(0).afficherCouleur();
         }
