@@ -9,6 +9,7 @@ public class Mains implements Combinaison {
 
     Combo plusForteCombi;
     List<Carte> mainForte;
+    Carte carteForte;
 
     public Mains(String saisie) {
 
@@ -16,8 +17,8 @@ public class Mains implements Combinaison {
         List<Carte> main = new ArrayList<>();
         saisie = saisie.replaceAll("\\s", "");
 
-        if (saisie.length() < taille_max) {
-            System.err.println("Entrée invalide");
+        if (saisie.length() < taille_max || saisie.length() > taille_max) {
+            System.err.println("Entree de taille invalide");
             System.exit(-1);
         }
         for (int i = 0; i < taille_max; i += 2) {
@@ -30,6 +31,18 @@ public class Mains implements Combinaison {
 
         this.plusForteCombi = trouverCombo();
 
+        this.carteForte = plusForteCarte();
+
+    }
+
+    private Carte plusForteCarte() {
+        Carte forte = this.mainForte.get(0);
+        for (Carte it : this.mainForte) {
+            if (it.valeurSuperieure(forte)) {
+                forte = it;
+            }
+        }
+        return forte;
     }
 
     private boolean flush() {

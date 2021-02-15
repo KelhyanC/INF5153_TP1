@@ -37,7 +37,7 @@ Les tailles de réponses sont données à titre indicatif, mais il est clair qu'
 
 ### Question 3: Justification des choix de conception
 
-_Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum._
+j'ai décidé qu'à chaque erreur d'initialisation de Carte ou de main d'afficher un message d'erreur et d'arrêter le programme car cela sert à rien de poursuivre le déroulement d'un programme et la consommation de ressources dans l'optique d'aboutir à une erreur.
 
 _Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum._
 
@@ -45,7 +45,7 @@ _Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
 
 ### Question 4: Évolution du code objet
 
-_Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum._
+L'ajout de partie contenant n joueurs a été posssible dans les cas du lancement du programme à la ligne de commande et de saisie de l'utilisateur. Cependant, l'option permettant de recommencer une partie et donc d'accumuler des points pour chaque joueur à été possible seulement en saisie utilisateur et non en ligne de commande car lors d'une saisie en ligne de commande, nous passons les arguments d'un trait. Le programme s'exécute donc une fois avec ces arguments et se termine. La seule option que j'ai trouvé est de basculer sur une saisie utilisateur après l'éxecution à la ligne de commande.
 
 ## Auto-évaluation (optionnelle)
 

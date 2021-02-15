@@ -24,8 +24,16 @@ public class Partie {
                 gagnant = joueurs.get(i);
                 egalite = false;
             } else if (gagnant.main.plusForteCombi.ordinal() == joueurs.get(i).main.plusForteCombi.ordinal()) {
-                perdant = joueurs.get(i); // Peaufiner le departagement en cas d'egalite de mm rang
-                egalite = true;
+                if (gagnant.main.carteForte.valeurSuperieure(joueurs.get(i).main.carteForte) == true) {
+                    egalite = false;
+                } else if (joueurs.get(i).main.carteForte.valeurSuperieure(gagnant.main.carteForte) == true) {
+                    perdant = gagnant;
+                    gagnant = joueurs.get(i);
+                    egalite = false;
+                } else {
+                    perdant = joueurs.get(i);
+                    egalite = true;
+                }
             }
         }
         if (egalite == false) {

@@ -53,7 +53,7 @@ public class Main {
             for (int i = 0; i < n; i++) {
                 System.out.print("P" + (i + 1) + " ? ");
                 Mains main = new Mains(sc.nextLine());
-                if (joueurs.size() >= i + 1) {
+                if (joueurs.size() > 1 && contientJoueur(joueurs, "P" + (i + 1)) == true) {
                     joueurs.get(i).main = main;
                 } else {
                     Joueur joueur = new Joueur(i + 1, main);
@@ -68,11 +68,20 @@ public class Main {
                 System.out.println("| " + it.id + " | " + it.victoires + " |");
             }
 
-            System.out.println("Voulez-vous rejouer ? (o) continuer/(n) arreter");
+            System.out.println("Voulez-vous rejouer ? (o) continuer / (n) arreter");
             continuer = sc.nextLine();
 
         } while (continuer.equals("o"));
         sc.close();
+    }
+
+    private static boolean contientJoueur(List<Joueur> joueurs, String cible) {
+        for (Joueur it : joueurs) {
+            if (it.id.equals(cible)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
