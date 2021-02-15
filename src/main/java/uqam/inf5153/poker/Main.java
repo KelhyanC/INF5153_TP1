@@ -9,6 +9,7 @@ public class Main {
 
     /**
      * The main function. If no arguments given, we will use stdin to read the data.
+     * Affiche le tableau des scores pour tous les joueurs qui ont participe au jeu
      * 
      * @param args les arguments (le nombre de mains souhaitees).
      */
@@ -20,11 +21,24 @@ public class Main {
             }
 
             Partie partie = new Partie(joueurs);
+
             System.out.println("Resultat : " + partie.resultat);
-            System.out.println("Explications : " + partie.explication);
+            System.out.println("Explications : " + partie.explication + "\n");
+
+            System.out.println("Tableau des scores :\n" + "| id | v |\n" + "----------");
+
             for (Joueur it : partie.joueurs) {
                 System.out.println("| " + it.id + " | " + it.victoires + " |");
             }
+
+            System.out.println("\nVoulez-vous rejouer ? (o) continuer / (n) arreter");
+
+            String recommencer = System.console().readLine();
+
+            if (recommencer.equals("n") == false) {
+                saisieUtilisateur(joueurs);
+            }
+
         } else {
             saisieUtilisateur(joueurs);
         }
@@ -34,6 +48,7 @@ public class Main {
     private static void saisieUtilisateur(List<Joueur> joueurs) {
         Scanner sc = new Scanner(System.in);
         String continuer = "n";
+        List<Joueur> sauvegarde = new ArrayList<>();
         do {
             int n;
             do {
@@ -50,6 +65,12 @@ public class Main {
             } while (n < 2);
 
             sc.nextLine();
+
+            if (n < joueurs.size()) { // réduit la liste pour un passage de n à n-i joueurs
+                sauvegarde = joueurs;
+                joueurs = joueurs.subList(0, n);
+            }
+
             for (int i = 0; i < n; i++) {
                 System.out.print("P" + (i + 1) + " ? ");
                 Mains main = new Mains(sc.nextLine());
@@ -62,13 +83,22 @@ public class Main {
                 System.out.println();
             }
             Partie partie = new Partie(joueurs);
+
             System.out.println("Resultat : " + partie.resultat);
-            System.out.println("Explications : " + partie.explication);
+            System.out.println("Explications : " + partie.explication + "\n");
+
+            if (joueurs.size() < sauvegarde.size()) {
+                joueurs = sauvegarde;
+                partie.joueurs = joueurs;
+            }
+
+            System.out.println("Tableau des scores :\n" + "| id | v |\n" + "----------");
+
             for (Joueur it : partie.joueurs) {
                 System.out.println("| " + it.id + " | " + it.victoires + " |");
             }
 
-            System.out.println("Voulez-vous rejouer ? (o) continuer / (n) arreter");
+            System.out.println("\nVoulez-vous rejouer ? (o) continuer / (n) arreter");
             continuer = sc.nextLine();
 
         } while (continuer.equals("o"));
