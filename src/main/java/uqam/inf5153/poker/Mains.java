@@ -3,6 +3,14 @@ package uqam.inf5153.poker;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Classe illustrant une main de cartes
+ * Une main se compose de :
+ * une liste de 5 cartes
+ * La combinaison la plus forte à partir de cette main (Couleur,Flush,Plus Haute Carte)
+ * L'ensemble des cartes representant la combinaison la plus forte de la main
+ * La carte la plus forte de la main
+*/
 public class Mains implements Combinaison {
 
     private List<Carte> cartes;
@@ -11,6 +19,10 @@ public class Mains implements Combinaison {
     List<Carte> mainForte;
     Carte carteForte;
 
+    /*
+     * Initialise une main de cartes a partir d'une entree sous forme de chaine de
+     * caracteres
+     */
     public Mains(String saisie) {
 
         int taille_max = 10;
@@ -35,6 +47,7 @@ public class Mains implements Combinaison {
 
     }
 
+    // Retourne la carte la plus forte de la main selon sa valeur
     private Carte plusForteCarte() {
         Carte forte = this.mainForte.get(0);
         for (Carte it : this.mainForte) {
@@ -45,6 +58,10 @@ public class Mains implements Combinaison {
         return forte;
     }
 
+    /*
+     * Verifie si la main possede une combinaison de type flush. Si vraie
+     * ,initialise la liste de carte representant cette combinaison
+     */
     private boolean flush() {
         for (int i = 1; i < this.cartes.size(); i++) {
             if (this.cartes.get(0).couleurEgale(this.cartes.get(i)) == false) {
@@ -56,8 +73,8 @@ public class Mains implements Combinaison {
     }
 
     /*
-     * Utilisation d'un set dans la methode pour une meilleur complexite de O(n) Au
-     * lieu de O(n²) avec une double boucle sur un tableau
+     * Verifie si la main contient une combinaison de type paire. Si vraie ,
+     * initialise la liste de carte representant cette combinaison
      */
     private boolean paire() {
         boolean estPaire = false;
@@ -82,6 +99,9 @@ public class Mains implements Combinaison {
         return estPaire;
     }
 
+    /*
+     * Trouve la combinaison la plus forte a partir d'une main de cartes
+     */
     @Override
     public Combo trouverCombo() {
         if (this.flush()) {
@@ -102,6 +122,9 @@ public class Mains implements Combinaison {
         return Combo.HAUTE_CARTE;
     }
 
+    /*
+     * Affiche la main forte sous forme de chaine de caractères
+     */
     public String afficherMainForte() {
         switch (this.plusForteCombi) {
             case COULEUR:

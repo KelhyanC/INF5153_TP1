@@ -3,15 +3,23 @@ package uqam.inf5153.poker;
 import java.util.*;
 
 /**
- * A class to find the winner in a poker game
+ * Point d'entre du programme qui effectue l'arbitrage et affiche les resultats
+ * d'un jeu de poker entre plusieur joueurs. Une partie de poker doit contenir
+ * au minimum 2 joueurs. Chaque joueur doit posseder une main de 5 cartes. Les
+ * cas de triche ne sont pas pris en compte. A la fin de chaque partie un
+ * tableau des scores montrant les victoires de chaque joueur ayant participe au
+ * moins une fois a la partie est affiche.
  */
 public class Main {
 
     /**
-     * The main function. If no arguments given, we will use stdin to read the data.
-     * Affiche le tableau des scores pour tous les joueurs qui ont participe au jeu
+     * La fonction principale. Si aucun argument est donne, nous utilisons stdin
+     * pour lire les donnees. Si des arguments sont passes,la partie commence avec
+     * ces arguments et si l'utilisateur souhaite recommencer une partie, les
+     * donnees sont lues depuis stdin.
      * 
-     * @param args les arguments (le nombre de mains souhaitees).
+     * @param args les mains a evaluer (autant de mains souhaitees), chaque main
+     *             passee en argument compte pour un joueur.
      */
     public static void main(String[] args) {
         List<Joueur> joueurs = new ArrayList<>();
@@ -45,6 +53,13 @@ public class Main {
 
     }
 
+    /*
+     * Effectue l'initialisation des mains des joueurs et effectue l'arbitrage de la
+     * partie depuis l'entree standard. L'utilisateur choisit le nombre de joueurs
+     * pour chaque partie et initialise la main des n joueurs.
+     * 
+     * @param joueurs, la liste de joueurs pour laquelle effectuer l'arbitrage
+     */
     private static void saisieUtilisateur(List<Joueur> joueurs) {
         Scanner sc = new Scanner(System.in);
         String continuer = "n";
@@ -66,7 +81,8 @@ public class Main {
 
             sc.nextLine();
 
-            if (n < joueurs.size()) { // réduit la liste pour un passage de n à n-i joueurs
+            // réduit la liste pour un passage de n à n-i joueurs
+            if (n < joueurs.size()) {
                 sauvegarde = joueurs;
                 joueurs = joueurs.subList(0, n);
             }
@@ -87,6 +103,8 @@ public class Main {
             System.out.println("Resultat : " + partie.resultat);
             System.out.println("Explications : " + partie.explication + "\n");
 
+            // Selectionne la liste de tous les joueurs y compris ceux qui ne sont pas
+            // presents dans la partie en cours
             if (joueurs.size() < sauvegarde.size()) {
                 joueurs = sauvegarde;
                 partie.joueurs = joueurs;
@@ -105,6 +123,13 @@ public class Main {
         sc.close();
     }
 
+    /*
+     * Verifie l'existence d'un joueur dans une liste
+     * 
+     * @param joueurs , la liste a verifier
+     * 
+     * @param cible, l'identifiant du joueur a chercher
+     */
     private static boolean contientJoueur(List<Joueur> joueurs, String cible) {
         for (Joueur it : joueurs) {
             if (it.id.equals(cible)) {
