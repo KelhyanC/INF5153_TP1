@@ -10,7 +10,7 @@ public class Main {
     /**
      * The main function. If no arguments given, we will use stdin to read the data.
      * 
-     * @param args the arguments (the two hands).
+     * @param args les arguments (le nombre de mains souhaitees).
      */
     public static void main(String[] args) {
         List<Joueur> joueurs = new ArrayList<>();
@@ -24,13 +24,6 @@ public class Main {
             System.out.println("Explications : " + partie.explication);
             for (Joueur it : partie.joueurs) {
                 System.out.println("| " + it.id + " | " + it.victoires + " |");
-            }
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Voulez-vous rejouer ? (o) continuer/(n) arreter");
-            String reponse = sc.nextLine();
-            sc.close();
-            if (reponse.equals("o")) {
-                saisieUtilisateur(joueurs);
             }
         } else {
             saisieUtilisateur(joueurs);
@@ -60,8 +53,12 @@ public class Main {
             for (int i = 0; i < n; i++) {
                 System.out.print("P" + (i + 1) + " ? ");
                 Mains main = new Mains(sc.nextLine());
-                Joueur joueur = new Joueur(i + 1, main);
-                joueurs.add(joueur);
+                if (joueurs.size() >= i + 1) {
+                    joueurs.get(i).main = main;
+                } else {
+                    Joueur joueur = new Joueur(i + 1, main);
+                    joueurs.add(joueur);
+                }
                 System.out.println();
             }
             Partie partie = new Partie(joueurs);
