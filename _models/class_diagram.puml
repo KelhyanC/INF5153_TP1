@@ -8,19 +8,19 @@ center footer project #1 - class diagram
 package uqam.inf5153.poker {
 
   class Main {
-    String result
-    --
     + {static} main(args: String[])
     --
-    - str2Array(s: String): String[]
-    - findComb(cs: String[]): String
-    - comp(p1: String, p2: String): String
-    - maxVal(cs: String[]): Char
-    - tie(p1: String, p2: String): String
-    - getTable(): Map<Char, Int>
+    - {static} saisieUtilisateur(joueurs: List<Joueur>)
+    - {static} contientJoueur(joueurs: List<Joueur>) : boolean
   }
 
   Class Carte{
+    + this(val:String, clr:String)
+    + afficherValeur() : String
+    + afficherCouleur() : String
+    + couleurEgale(autre : Carte) : boolean
+    + valeurEgale(autre : Carte) : boolean
+    + valeurSuperieure(autre : Carte) : boolean
   }
 
   Enum Valeur{
@@ -32,24 +32,39 @@ package uqam.inf5153.poker {
   }
 
   class Mains{
-    - cartes: ArrayList<Carte>
-    - cartePlusForte() : Carte 
+     + plusForteCombi : Combo 
+     + carteForte : Carte
+     + mainForte : List<Carte>
+     --
+     + this(saisie : String)
+     + trouverCombo() : Combo
+     + afficherMainForte() : String
+     --
+     - plusForteCarte() : Carte
+     - flush() : boolean
+     - paire() : boolean
   }
 
   class Joueur{
-    - id : String
-    - main : Mains
-    - victoires : int
+    + id : String
+    + main : Mains
+    + victoires : int
+    --
+    + this(numero : int, main : Mains)
   }
 
   class Partie{
-    + resultat : String  //obtenir main gagnante du joueur
-    - joueurs : ArrayList
-
+    + joueurs : List<Joueur>
+    + resultat : String  
+    + explication : String
+    --
+    + this(joueurs : List<Joueur>)
+    --
+    - evaluerPartie(joueurs: List<Joueur>)
   }
 
   interface Combinaison{
-
+    + trouverCombo(): Combo
   }
 
   Enum Combo{
@@ -58,12 +73,12 @@ package uqam.inf5153.poker {
 
   Carte *-- "1" Valeur
   Carte *-- "1" Couleur
-  Mains *-- Carte
-  Joueur --> Mains
-  Partie --> "2..*" Joueur
+  Mains *-- "5" Carte
+  Joueur o-- "1" Mains
+  Partie *-- "2..*" Joueur
   Main --> Partie
   Combinaison *-- "1" Combo
-  Mains -- Combinaison
+  Mains --> Combinaison
 
 }
 
