@@ -41,6 +41,9 @@ j'ai décidé qu'à chaque erreur d'initialisation de Carte ou de main d'affiche
 
 L'utilisation de listes spour stocker les cartes et les joueurs a une moins bonne complexite temporelle O(n²) que l'utilisation d'un arbe O(log n). Cependant la liste permet une implementation et une maintenabilité plus facile et est facilement mutable en une autre structure par la suite. Dans notre cas, nous n'avons pas un grand nombre de cartes ou de joueurs à traiter donc une liste fera l'affaire.
 
+Les tests que j'ai implémenté ne couvrent pas tous les cas d'utilisation du programme, notamment la saisie de données de l'utilisateurs et le passage par argument du programme.
+La possibilité de recommencer une partie avec plus ou moins de joueurs et l'affichage du tableau des scores finales, sont testables manuellement.
+
 _Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum._
 
 _Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum._

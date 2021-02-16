@@ -258,4 +258,67 @@ public class MainTest {
         assertEquals("ROI de S pour P1 bat DIX de S pour P2".toLowerCase().trim(),
                 partie.explication.toLowerCase().trim());
     }
+
+    @Test
+    public void suiviDeVictoiresJoueurs() {
+        List<Joueur> joueurs = new ArrayList<>();
+        Joueur j1 = new Joueur(1, new Mains("KS KD 3s 4c 5h"));
+        Joueur j2 = new Joueur(2, new Mains("1S 2s 3h 4s 5S"));
+
+        joueurs.add(j1);
+        joueurs.add(j2);
+
+        Partie partie = new Partie(joueurs);
+
+        // J1 gagne
+        assertEquals("P1", partie.resultat);
+        assertEquals(0, j2.victoires);
+        assertEquals(1, j1.victoires);
+
+        j2.main = new Mains("1S 2S 4S 6S TS");
+
+        partie = new Partie(joueurs);
+
+        // J2 gagne
+        assertEquals("P2", partie.resultat);
+        assertEquals(1, j2.victoires);
+        assertEquals(1, j1.victoires);
+
+        Joueur j3 = new Joueur(3, new Mains("KH QH JH 9H 8H"));
+        joueurs.add(j3);
+        assertEquals(0, j3.victoires);
+
+        partie = new Partie(joueurs);
+
+        // ajout et victoire de j3
+        assertEquals("P3", partie.resultat);
+        assertEquals(1, j3.victoires);
+        assertEquals(1, j2.victoires);
+        assertEquals(1, j1.victoires);
+
+        // P3 se retire de la partie
+        joueurs.remove(2);
+
+        j1.main = j3.main;
+
+        partie = new Partie(joueurs);
+
+        // Victoire de j1
+        assertEquals("P1", partie.resultat);
+        assertEquals(1, j3.victoires);
+        assertEquals(1, j2.victoires);
+        assertEquals(2, j1.victoires);
+
+        j2.main = new Mains("KS 3C 4H 5D 6S");
+        j1.main = new Mains("KD 7C 8H 9D TS");
+
+        partie = new Partie(joueurs);
+
+        // egalite
+        assertEquals("TIE", partie.resultat);
+        assertEquals(1, j3.victoires);
+        assertEquals(1, j2.victoires);
+        assertEquals(2, j1.victoires);
+
+    }
 }
