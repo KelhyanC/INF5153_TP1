@@ -24,7 +24,7 @@ public class Carte {
 
         if (this.valeur == null || this.couleur == null) {
             System.err.println("Erreur d'initialisation de Carte");
-            System.exit(-1);
+            System.exit(1);
         }
     }
 

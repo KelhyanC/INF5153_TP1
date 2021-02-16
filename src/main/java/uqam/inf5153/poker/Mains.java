@@ -31,7 +31,7 @@ public class Mains implements Combinaison {
 
         if (saisie.length() < taille_max || saisie.length() > taille_max) {
             System.err.println("Entree de taille invalide");
-            System.exit(-1);
+            System.exit(2);
         }
         for (int i = 0; i < taille_max; i += 2) {
             Carte carte = new Carte(String.valueOf(saisie.charAt(i)), String.valueOf(saisie.charAt(i + 1)));
