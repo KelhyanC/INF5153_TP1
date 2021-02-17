@@ -67,11 +67,31 @@ activate M
         group saisieUtilisateur(joueurs)
             create "s: Scanner" as S
             M -> S: new(stdin)
+            create "sauv: List<Joueur>" as sauv
+            M -> sauv
             loop continuer != n
                 M -> S: nextInt()
                 activate S
-                S --> M: entier
+                S --> M: n = entier
                 deactivate S
+
+                M -> J: size()
+                activate J
+                J --> M: joueurSize
+                deactivate J
+
+                opt n < joueurSize
+                    M -> J
+                    activate J
+                    J --> M : joueurs
+                    deactivate J
+                    M -> sauv: sauv = joueurs
+                    M -> J: subList(0,n)
+                    activate J
+                    J --> M: joueurs
+                    deactivate J
+                end
+
                 loop i < n
                     M -> S: nextLine()
                     activate S
@@ -114,6 +134,15 @@ activate M
                 activate Pj
                 Pj --> M
                 deactivate Pj
+
+                opt joueur.size() < sauv.size()
+                    M -> sauv
+                    activate sauv
+                    sauv --> M: sauv
+                    deactivate sauv
+                    M -> J: joueurs = sauv
+                end
+
                 M -> Pj : score
                 activate Pj
                 loop pour tout joueurs dans la partie
