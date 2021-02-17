@@ -2,35 +2,144 @@
 !include _common.style
 
 title Poker Game (Behavior)
-center footer project #1 - sequence diagram
+center footer TP #1 - sequence diagram
 
 actor "User" as U
 participant "_: Main" as M
 
 U -> M: main(args: String[])
 activate M
-    alt |args| = 2
-        M -> M: p1 = str2Array(args[0])
-        M -> M: p2 = str2Array(args[1])
-    else
-        create "s: Scanner" as S
-        M -> S: new(stdin)
-        M -> S: readLine()
-        S --> M: line
-        M -> M: p1 = str2Array(line)
-        M -> S: readLine()
-        S --> M: line
-        M -> M: p2 = str2Array(line)
-        M -> S: close()
-        destroy S
+    create participant "joueurs: List<Joueur>" as J
+    M -> J
+    alt |args| >= 2
+        loop i < args.length
+            create "mi: Mains" as mi
+            M-> mi : new(args[i])
+            activate mi
+            mi --> M : main
+            deactivate mi
+            create "ji: Joueur" as ji
+            M -> ji: new(i+1, main)
+            activate ji
+            ji --> M : joueur
+            deactivate ji
+            M -> J : add(joueur)
+        end
+        
+        create "p: Partie" as P
+        M -> P : new(joueurs)
+        activate P
+        P -> P : evaluerPartie(joueurs)
+        P --> M
+        deactivate P
+
+        M -> P : resultat
+        activate P
+        P --> M
+        deactivate P
+        M -> P : explication
+        activate P
+        P --> M
+        deactivate P
+        M -> P : score
+        activate P
+        loop pour tout joueurs dans la partie
+            P -> J: joueur(i).id
+            activate J
+            J --> P : id
+            deactivate J
+            P --> M : id
+            P -> J: joueur(i).victoires
+            activate J
+            J --> P : victoires
+            deactivate J
+            P --> M : victoires
+        end
+        deactivate P
+
+        M -> M : recommencer = System.console().readLine()
+
+        opt recommencer != "n"
+            M -> M: saisieUtilisateur(joueurs)
+        end
+    
+    else lecture stdin
+        group saisieUtilisateur(joueurs)
+            create "s: Scanner" as S
+            M -> S: new(stdin)
+            loop continuer != n
+                M -> S: nextInt()
+                activate S
+                S --> M: entier
+                deactivate S
+                loop i < n
+                    M -> S: nextLine()
+                    activate S
+                    S --> M: line
+                    deactivate S
+                    create "mj: Mains" as mj
+                    M -> mj: new(line)
+                    activate mj
+                    mj --> M: main
+                    deactivate mj
+                    M -> J: size()
+                    J -> M : taille
+                    M -> M : reponse = contientJoueur(joueurs)
+                    alt taille > 1 && reponse = true
+                        M -> J: get(i)
+                        J --> M: j[i].main
+                        M -> J: j[i].main = main
+                    
+                    else ne contient pas joueur
+                        create "jn: Joueur" as jn
+                        M -> jn: new(i+1, main)
+                        activate jn
+                        jn --> M : joueur
+                        deactivate jn
+                        M -> J : add(joueur)
+                    end
+                end
+                create "pj: Partie" as Pj
+                M -> Pj : new(joueurs)
+                activate Pj
+                Pj -> Pj : evaluerPartie(joueurs)
+                Pj --> M
+                deactivate Pj
+
+                M -> Pj : resultat
+                activate Pj
+                Pj --> M
+                deactivate Pj
+                M -> Pj : explication
+                activate Pj
+                Pj --> M
+                deactivate Pj
+                M -> Pj : score
+                activate Pj
+                loop pour tout joueurs dans la partie
+                    Pj -> J: joueur(i).id
+                    activate J
+                    J --> Pj : id
+                    deactivate J
+                    Pj --> M : id
+                    Pj -> J: joueur(i).victoires
+                    activate J
+                    J --> Pj : victoires
+                    deactivate J
+                    Pj --> M : victoires
+                end
+                deactivate Pj
+
+                M -> S: nextLine()
+                activate S
+                S --> M: continuer = line
+                deactivate S
+            end
+            M -> S: close()
+            destroy S
+        end
     end
-    opt error
-        M --> U: "ERROR"
-    end
-    M -> M: c1 = findComb(p1)
-    M -> M: c2 = findComb(p2)
-    M -> M: result = comp(c1, c2)
-    M --> U: result
+    M --> U
 deactivate M
 
 @enduml

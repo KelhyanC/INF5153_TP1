@@ -79,6 +79,7 @@ public class Main {
                 }
             } while (n < 2);
 
+            // consomme une ligne pour les input
             sc.nextLine();
 
             // réduit la liste pour un passage de n à n-i joueurs

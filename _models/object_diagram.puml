@@ -2,10 +2,112 @@
 !include _common.style
 
 title Poker Game (Object)
-center footer project #1 - object diagram
+center footer TP #1 - object diagram
 
 object "m: Main" as M {
-  result = null
 }
+
+object "p: Partie" as P{
+  resultat = "P1"
+  Explication = "Couleur a H pour P1
+   bat Paire de Roi pour P2"
+}
+
+object "joueurs: List<Joueur>" as J{
+
+}
+
+object "j1: Joueur" as j1{
+ id = "P1";
+ victoires = 1
+}
+
+object "j2: Joueur" as j2{
+  id = "P2"
+  victoires = 0
+}
+
+object "m1: Mains" as m1{
+  plusForteCombi = COULEUR
+}
+
+object "m2: Mains" as m2{
+  plusForteCombi = PAIRE
+}
+
+object "_: Carte" as C11{
+  valeur = K
+  couleur = S
+}
+
+object "_: Carte" as C12{
+  valeur = T
+  couleur = S
+}
+
+object "_: Carte" as C13{
+  valeur = 4
+  couleur = S
+}
+
+object "_: Carte" as C14{
+  valeur = 3
+  couleur = S
+}
+
+object "_: Carte" as C15{
+  valeur = 2
+  couleur = S
+}
+
+object "_: Carte" as C21{
+  valeur = K
+  couleur = H
+}
+
+object "_: Carte" as C22{
+  valeur = K
+  couleur = D
+}
+
+object "_: Carte" as C23{
+  valeur = 7
+  couleur = D
+}
+
+object "_: Carte" as C24{
+  valeur = 5
+  couleur = S
+}
+
+object "_: Carte" as C25{
+  valeur = 1
+  couleur = H
+}
+
+M . P
+P .. J
+
+J *.. j1
+J *.. j2
+
+j1 o.. m1
+j2 o.. m2
+
+m1 . m2
+
+m1 *.. C11
+m1 *.. C12
+m1 *.. C13
+m1 *.. C14
+m1 *.. C15
+
+m2 *.. C21
+m2 *.. C22
+m2 *.. C23
+m2 *.. C24
+m2 *.. C25
+
+
 
 @enduml
